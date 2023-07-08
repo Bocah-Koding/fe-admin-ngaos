@@ -4,6 +4,22 @@ import { useState } from "react";
 
 export default function Dropdown() {
   const [value, setValue] = useState("");
+  const [focus, setFocus] = useState(false);
+  const list = [
+    {
+      id: 1,
+      item: "item 1",
+    },
+    {
+      id: 2,
+      item: "item 2",
+    },
+  ];
+
+  function focusInput() {
+    setFocus(!focus);
+  }
+
   return (
     <div className="dropdown">
       <input
@@ -12,18 +28,28 @@ export default function Dropdown() {
         className="input input-bordered w-full max-w-xs"
         value={value}
         onChange={(e) => setValue(e.target.value)}
+        onFocus={focusInput}
+        readOnly
       />
 
       <ul
         tabIndex={0}
         className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
       >
-        <li>
-          <a onClick={(e) => setValue(e.target.innerHTML)}>Item 1</a>
-        </li>
-        <li>
-          <a>Item 2</a>
-        </li>
+        {focus &&
+          list.map((listItem, index) => {
+            return (
+              <li key={index} onClick={focusInput}>
+                <a
+                  onClick={() => {
+                    setValue(listItem.item);
+                  }}
+                >
+                  {listItem.item}
+                </a>
+              </li>
+            );
+          })}
       </ul>
     </div>
   );
