@@ -1,5 +1,6 @@
 "use client";
 
+import Date from "@/components/Date";
 import Dropdown from "@/components/Dropdown";
 import Nav from "@/components/Nav";
 
@@ -42,6 +43,7 @@ export default function Home() {
 
         {/* dropdown */}
         <Dropdown />
+        <Date />
       </main>
     </>
   );
